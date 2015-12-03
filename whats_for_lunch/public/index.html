@@ -14,16 +14,21 @@
   <body>
     <h1 class="title">What's For Lunch?</h1>
 
+    Show/Hide Users: <input type="checkbox" ng-model="checked" aria-label="Toggle ngHide"><br/>
+
+
     <section ng-controller="UsersController as users">
-      <h2>Our Favorite Users</h2>
-      <ul id="users">
-        <li ng-repeat="user in users.all">
-          <h4>{{user.name}}</h4><button ng-click="users.deleteUser(user)">X</button>
-          <p>{{user._id}}</p>
-          <p>{{user.workZip}}</p>
-          <p>{{user.homeZip}}</p>
-        </li>
-      </ul>
+      <div class="check-element" ng-show="checked" id="user_display">
+        <h2>Our Favorite Users</h2>
+        <ul id="users">
+          <li ng-repeat="user in users.all">
+            <h4>{{user.name}}</h4><button ng-click="users.deleteUser(user)">X</button>
+            <p>{{user._id}}</p>
+            <p>{{user.workZip}}</p>
+            <p>{{user.homeZip}}</p>
+          </li>
+        </ul>
+      </div>
       <form class="add-user" ng-submit="users.addUser()">
         <h3>Sign Up Here!</h3>
         <div>
@@ -47,6 +52,9 @@
         </div>
       </form>
     </section>
+
+    <div class="results_display">
+    </div>
 
   </body>
 </html>
