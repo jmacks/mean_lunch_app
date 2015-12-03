@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700' rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/style.css">
@@ -26,10 +28,9 @@
         <h2>Our Favorite Users</h2>
         <ul id="users">
           <li ng-repeat="user in users.all">
-            <h4>{{user.name}}</h4><button ng-click="users.deleteUser(user)">X</button>
-            <p>{{user._id}}</p>
-            <p>{{user.workZip}}</p>
-            <p>{{user.homeZip}}</p>
+            <h4>Name: {{user.name}}<button ng-click="users.deleteUser(user)">X</button></h4>
+            <p>Work Zip: {{user.workZip}}</p>
+            <p>Home Zip: {{user.homeZip}}</p>
           </li>
         </ul>
       </div>
@@ -52,13 +53,13 @@
           <input type="text" id="new-user-homezip" placeholder="Home Zipcode" ng-model="users.newUser.homeZip">
         </div>
         <div>
-          <input type="submit" value="SignUp">
+          <input type="submit" id="signup" value="SignUp">
         </div>
       </form>
     </section>
 
     <div>
-      <button class="findFood">FIND FOOD</button>
+      <button class="findFood">FEED ME!</button>
     </div>
 
 
