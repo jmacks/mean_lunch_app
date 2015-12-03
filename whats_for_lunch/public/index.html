@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="Users">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <!-- <script src="/scripts/underscore.js"</script> -->
+    <script src="/scripts/angular/angular.js"></script>
+    <script src="/app.js"></script>
+    <script src="/userController.js"></script>
+    <title>WhatsForLunch</title>
+  </head>
+  <body>
+    <h1 class="title">What's For Lunch?</h1>
+
+    <section ng-controller="UsersController as users">
+      <h2>Our Favorite Users</h2>
+      <ul id="users">
+        <li ng-repeat="user in users.all">
+          <h4>{{user.name}}</h4><button ng-click="users.deleteUser(user)">X</button>
+          <p>{{user._id}}</p>
+          <p>{{user.workZip}}</p>
+          <p>{{user.homeZip}}</p>
+        </li>
+      </ul>
+      <form class="add-user" ng-submit="users.addUser()">
+        <h3>Sign Up Here!</h3>
+        <div>
+          <label for="new-user-name">User's Name:</label>
+          <input type="text" id="new-user-name" placeholder="Name Goes Here" ng-model="users.newUser.name">
+        </div>
+        <div>
+          <label for="new-user-password">User's Password:</label>
+          <input type="text" id="new-user-password" placeholder="Make It Good" ng-model="users.newUser.password">
+        </div>
+        <div>
+          <label for="new-user-workzip">Work Zip:</label>
+          <input type="text" id="new-user-workzip" placeholder="Work Zipcode" ng-model="users.newUser.workZip">
+        </div>
+        <div>
+          <label for="new-user-homezip">Home Zip:</label>
+          <input type="text" id="new-user-homezip" placeholder="Home Zipcode" ng-model="users.newUser.homeZip">
+        </div>
+        <div>
+          <input type="submit" value="SignUp">
+        </div>
+      </form>
+    </section>
+
+  </body>
+</html>

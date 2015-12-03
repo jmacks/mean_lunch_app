@@ -10,13 +10,15 @@ const mongoose = require('mongoose');
 const expressJWT = require('express-jwt');
 const jwt = require('jsonwebtoken');
 
+const routes = require('./routes/user.js');
+
 //use this shit
-app.use('/', express.static('public'));
+app.use('/', express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger('dev'));
-app.use('/scripts', express.static(__dirname + '/node_modules/angular'));
-app.use('/scripts', express.static(__dirname + '/node_modules/underscore'));
+app.use('/scripts', express.static(__dirname + '/node_modules'));
+app.use(routes);
 
 //connect to mongo database
 mongoose.connect('mongodb://localhost/whatsForLunch', function(err){
