@@ -12,6 +12,13 @@ body {
      1px 1px 0 #000;
 }
 
+.results_display {
+  font-family: 'Sigmar One', cursive;
+  font-size: 60px;
+  color: red;
+}
+
+
 
 .title {
   text-align: center;
