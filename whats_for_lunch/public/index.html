@@ -13,6 +13,7 @@
     <script src="/app.js"></script>
     <script src="/userController.js"></script>
     <script src="/loginController.js"></script>
+    <!-- <script src="/foodController.js"></script> -->
 
 
     <title>WhatsForLunch</title>
@@ -58,13 +59,19 @@
       </form>
     </section>
 
-    <div>
-      <button class="findFood">FEED ME!</button>
-    </div>
+    <div class="" ng-controller="FoodController as foodCtrl">
+      <div>
+        <button class="findFood" ng-click="foodCtrl.getFood()">FEED ME!</button>
+      </div>
 
 
-    <div class="results_display">
+      <div class="results_display">
+        <p ng-model="foodCtrl.all"></p>
+        <p>{{ foodCtrl.all }}</p>
+      </div>
+
     </div>
+
 
   </body>
 </html>
