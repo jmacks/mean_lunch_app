@@ -1,5 +1,5 @@
 'use strict';
-
+let TOKEN;
 angular.module('Users', [])
        .controller('UsersController', UsersController)
        .controller('FoodController', FoodController)
@@ -21,7 +21,7 @@ function UsersController($http){
   //aaannnddd the functions!
   function getUser(){
     $http
-      .get('http://localhost:3000/user')
+      .get('http://localhost:3000/user' )  //{token: TOKEN}
       .then(function(response){
         self.all = response.data.users;
       });
@@ -87,19 +87,17 @@ AuthController.$inject = ['$http'];
 
 function AuthController($http){
   let self = this;
-  self.token = '';
+  self.login = login;
 
-  function login(data){
-    var userParams = req.body.user;
-    data.preventDefault();
+  function login(user){
     $http
-    .post("http://localhost:3000/authenticate", { name: userParams.name, password: userParams.password }, function(data){
-      if(data.token){
-        self.token = data.token;
+    .post("http://localhost:3000/authenticate", { name: user.name, password: user.password }).success(function(data, status){
+       if(data.token){
+       TOKEN = data.token;
+        console.log(data.token);
         alert("login successful");
-        
-      }
-    })
+       }
+    });
 
   }
 

@@ -60,6 +60,22 @@
       </form>
     </section>
 
+    <section ng-controller="AuthController as authorize">
+      <form class="login">
+        <div>
+        <label for="user-name">Name:</label>
+        <input type="text" id="user-name" placeholder="NAME" ng-model="user.name">
+        </div>
+        <div>
+          <label for="user-password">Password:</label>
+          <input type="text" id="user-password" placeholder="PASSWORD" ng-model="user.password">
+        </div>
+        <div>
+          <input type="submit" ng-click="authorize.login(user)" id="login" value="Login">
+        </div>
+      </form>
+    </section>
+
     <div class="" ng-controller="FoodController as foodCtrl">
       <div>
         <button class="findFood" ng-click="foodCtrl.getFood()">FEED ME!</button>

@@ -25,7 +25,7 @@ app.use(routes);
 //connect to mongo database
 mongoose.connect('mongodb://localhost/whatsForLunch', function(err){
   if(err){
-    console.log('there is a CONNECTION ERROR');
+    console.log('there is a CONNECTION ERROR to the DATABASE');
   } else {
     console.log('CONNECTION SUCCESS!!!')
   }

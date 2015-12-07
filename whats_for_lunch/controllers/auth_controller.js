@@ -18,7 +18,9 @@ let post = function(req, res){
       if(user.password != req.body.password){
         res.json({success: false, message: "password does not match user name"})
       } else{
+        console.log('succesfully logged in');
         var token = jwt.sign(user, secret, {expiresIN: 9999999999});
+        console.log(token);
         res.json({
           success: true,
           message: 'Authorized',
