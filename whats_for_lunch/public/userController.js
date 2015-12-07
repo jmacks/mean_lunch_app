@@ -2,7 +2,8 @@
 
 angular.module('Users', [])
        .controller('UsersController', UsersController)
-       .controller('FoodController', FoodController);
+       .controller('FoodController', FoodController)
+       .controller('AuthController', AuthController)
 
 UsersController.$inject = ['$http'];
 
@@ -80,8 +81,27 @@ $http
 });
 }
 
+}
 
+AuthController.$inject = ['$http'];
 
+function AuthController($http){
+  let self = this;
+  self.token = '';
+
+  function login(data){
+    var userParams = req.body.user;
+    data.preventDefault();
+    $http
+    .post("http://localhost:3000/authenticate", { name: userParams.name, password: userParams.password }, function(data){
+      if(data.token){
+        self.token = data.token;
+        alert("login successful");
+        
+      }
+    })
+
+  }
 
 
 }
