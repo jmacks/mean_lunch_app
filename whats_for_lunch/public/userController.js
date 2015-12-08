@@ -105,8 +105,8 @@ function AuthController($http){
         TOKEN = data.token;
         self.token = data.token;//doesnt work
         console.log(data.token);
-
-        self.test = "HI!";
+//testing connection between the dom and controller in login auth scope
+        self.test = "Hi " + user.name + " stop thinking and feed yourself";
 
         alert("Welcome " + user.name + " ,your logged in now GO EAT!");
        }
