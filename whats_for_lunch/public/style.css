@@ -129,4 +129,5 @@ body {
 #login-message {
   font-size: 45px;
   font-family: 'Vast Shadow', cursive;
+  text-transform: uppercase;
 }

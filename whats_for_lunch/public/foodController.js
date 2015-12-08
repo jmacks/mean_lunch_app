@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Users', [])
+angular.module('Users')
        .controller('FoodController', FoodController);
 
 FoodController.$inject = ['$http'];

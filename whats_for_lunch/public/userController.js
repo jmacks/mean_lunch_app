@@ -1,6 +1,6 @@
 'use strict';
 let TOKEN;
-angular.module('Users', [])
+angular.module('Users')
        .controller('UsersController', UsersController)
        .controller('FoodController', FoodController)
        .controller('AuthController', AuthController)
@@ -69,12 +69,33 @@ self.getFood = getFood;
 getFood();
 
 function getFood(){
+
+  let startPos;
+
+  let geoSuccess = function(position){
+    startPos = position;
+    var lat = startPos.coords.latitude;
+    var lon = startPos.coords.longitude;
+    console.log(lat);
+    console.log(lon);
+
+  };
+  var geoError = function(error){
+    console.log('geo error code:' + error.code);
+  };
+  navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+
+
+
   var cuisineArray = ['sushi', 'pizza', 'diner', 'american', 'chinese', 'korean', 'tapas', 'sandwich', 'mediterranean', 'burger', 'coffee', 'french', 'italian', 'german', 'spanish', 'mexican', 'filipino', 'russian', 'georgian'];
   var cuisineLength = cuisineArray.length;
   var randomInCuisineArray = Math.floor(Math.random()*cuisineLength);
   var randomCuisine = cuisineArray[randomInCuisineArray];
+
+
 $http
 .get("https://api.foursquare.com/v2/venues/search?client_id=D3SET0CHYGC3CASAHZN2KNTLUSQKA0KQMIXARVBKTN5PXXBM&client_secret=P32CRHV34KCIRUB0GAEZAB54NQBVJ3K42R0WC0DKF5MICCUX&v=20130815&ll=40.7,-74&query=" + randomCuisine)
+
 
 .then(function(res){
   var venuesLength = res.data.response.venues.length
@@ -82,7 +103,6 @@ $http
   console.log(res.data.response.venues[rando].name);
   self.all = res.data.response.venues[rando].name;
   // self.all = res.data.response.venues.name;
-
  // self.all = res.response;
 });
 }
