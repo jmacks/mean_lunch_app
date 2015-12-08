@@ -2,6 +2,7 @@
 <html ng-app="Users">
   <head>
     <meta charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Vast+Shadow' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Sigmar+One' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css'>
@@ -38,8 +39,9 @@
           </li>
         </ul>
       </div>
-      <form class="add-user" ng-submit="users.addUser()">
-        <h3 ng-if="TOKEN === hlkjh">Sign Up Here!</h3>
+      <form class="add-user" ng-if="authorize.token == undefined" ng-submit="users.addUser()">
+        <!-- doesnt work yet need to find angular tag that can show/hide divs based on token presence -->
+        <h3>Sign Up Here!</h3>
         <div>
           <label for="new-user-name">User's Name:</label>
           <input type="text" id="new-user-name" placeholder="Name Goes Here" ng-model="users.newUser.name">
@@ -63,7 +65,7 @@
     </section>
 
     <!-- <section ng-controller="AuthController as authorize"> -->
-    <section>
+    <section ng-if="authorize.token == undefined">
       <form class="login">
         <h3>Login</h3>
         <div>
@@ -80,7 +82,7 @@
       </form>
     </section>
 
-    <div class="" ng-controller="FoodController as foodCtrl">
+    <div class="" ng-hide="authorize.token == undefined" ng-controller="FoodController as foodCtrl">
       <div>
         <button class="findFood" ng-click="foodCtrl.getFood()">FEED ME!</button>
       </div>

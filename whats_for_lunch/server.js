@@ -27,7 +27,7 @@ mongoose.connect('mongodb://localhost/whatsForLunch', function(err){
   if(err){
     console.log('there is a CONNECTION ERROR to the DATABASE');
   } else {
-    console.log('CONNECTION SUCCESS!!!')
+    console.log('We\'ve Successfully Connected to the Database!!!')
   }
 });
 const db = mongoose.connection;
@@ -40,5 +40,5 @@ const db = mongoose.connection;
 
 //server listener
 const server = app.listen(3000, function(){
-  console.log('App is Running on Port 3000')
+  console.log('Whats for Lunch is Running on Port 3000')
 });
