@@ -19,7 +19,9 @@
 
     <title>WhatsForLunch</title>
   </head>
-  <body>
+  <body ng-controller="AuthController as authorize">
+  <p>{{authorize.token}}</p>
+  <p>{{authorize.test}}</p>
     <h1 class="title">What's For Lunch?</h1>
 
     Show/Hide Users: <input type="checkbox" ng-model="checked" aria-label="Toggle ngHide"><br/>
@@ -37,7 +39,7 @@
         </ul>
       </div>
       <form class="add-user" ng-submit="users.addUser()">
-        <h3>Sign Up Here!</h3>
+        <h3 ng-if="TOKEN === hlkjh">Sign Up Here!</h3>
         <div>
           <label for="new-user-name">User's Name:</label>
           <input type="text" id="new-user-name" placeholder="Name Goes Here" ng-model="users.newUser.name">
@@ -60,7 +62,8 @@
       </form>
     </section>
 
-    <section ng-controller="AuthController as authorize">
+    <!-- <section ng-controller="AuthController as authorize"> -->
+    <section>
       <form class="login">
         <h3>Login</h3>
         <div>

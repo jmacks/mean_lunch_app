@@ -9,7 +9,6 @@ UsersController.$inject = ['$http'];
 
 function UsersController($http){
   let self = this;
-
   self.all = [];
   self.addUser = addUser;
   self.getUser = getUser;
@@ -70,7 +69,7 @@ self.getFood = getFood;
 getFood();
 
 function getFood(){
-  var cuisineArray = ['sushi', 'pizza', 'diner', 'american', 'chinese', 'korean', 'tapas', 'sandwich', 'mediterranean', 'burger', 'coffee', 'french', 'italian', 'german', 'spanish', 'mexican'];
+  var cuisineArray = ['sushi', 'pizza', 'diner', 'american', 'chinese', 'korean', 'tapas', 'sandwich', 'mediterranean', 'burger', 'coffee', 'french', 'italian', 'german', 'spanish', 'mexican', 'filipino', 'russian', 'georgian'];
   var cuisineLength = cuisineArray.length;
   var randomInCuisineArray = Math.floor(Math.random()*cuisineLength);
   var randomCuisine = cuisineArray[randomInCuisineArray];
@@ -95,14 +94,21 @@ AuthController.$inject = ['$http'];
 function AuthController($http){
   let self = this;
   self.login = login;
+  self.token = TOKEN;
+
+  self.test = "";
 
   function login(user){
     $http
     .post("http://localhost:3000/authenticate", { name: user.name, password: user.password }).success(function(data, status){
        if(data.token){
         TOKEN = data.token;
+        self.token = data.token;//doesnt work
         console.log(data.token);
-        alert("Welcome " + user.name + " ,your Logged In Now GO EAT!");
+
+        self.test = "HI!";
+
+        alert("Welcome " + user.name + " ,your logged in now GO EAT!");
        }
     });
 
