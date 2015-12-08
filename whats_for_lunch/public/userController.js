@@ -100,9 +100,9 @@ function AuthController($http){
     $http
     .post("http://localhost:3000/authenticate", { name: user.name, password: user.password }).success(function(data, status){
        if(data.token){
-       TOKEN = data.token;
+        TOKEN = data.token;
         console.log(data.token);
-        alert("login successful");
+        alert("Welcome " + user.name + " ,your Logged In Now GO EAT!");
        }
     });
 
