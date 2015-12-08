@@ -71,19 +71,21 @@ getFood();
 function getFood(){
 
   let startPos;
-
-  let geoSuccess = function(position){
+  let geoOptions = {
+    maximumAge: 5 * 60 * 1000
+  }
+   function geoSuccess(position){
     startPos = position;
     var lat = startPos.coords.latitude;
     var lon = startPos.coords.longitude;
     console.log(lat);
     console.log(lon);
-
+    return fourSquareAPI(startPos);
   };
-  var geoError = function(error){
+  function geoError(error){
     console.log('geo error code:' + error.code);
   };
-  navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+  navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
 
 
 
@@ -92,9 +94,9 @@ function getFood(){
   var randomInCuisineArray = Math.floor(Math.random()*cuisineLength);
   var randomCuisine = cuisineArray[randomInCuisineArray];
 
-
+function fourSquareAPI(data){
 $http
-.get("https://api.foursquare.com/v2/venues/search?client_id=D3SET0CHYGC3CASAHZN2KNTLUSQKA0KQMIXARVBKTN5PXXBM&client_secret=P32CRHV34KCIRUB0GAEZAB54NQBVJ3K42R0WC0DKF5MICCUX&v=20130815&ll=40.7,-74&query=" + randomCuisine)
+.get("https://api.foursquare.com/v2/venues/search?client_id=D3SET0CHYGC3CASAHZN2KNTLUSQKA0KQMIXARVBKTN5PXXBM&client_secret=P32CRHV34KCIRUB0GAEZAB54NQBVJ3K42R0WC0DKF5MICCUX&v=20130815&ll="+data.coords.latitude+","+data.coords.longitude+"&query=" + randomCuisine)
 
 
 .then(function(res){
@@ -106,7 +108,7 @@ $http
  // self.all = res.response;
 });
 }
-
+}
 }
 
 AuthController.$inject = ['$http'];
