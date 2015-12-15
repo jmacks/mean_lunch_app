@@ -14,6 +14,7 @@ router.route('/user')
       .get(user.get);
 
 router.route('/user/:id')
+      .get(user.getOneUser)
       .put(user.put)
       .delete(user.destroy);
 

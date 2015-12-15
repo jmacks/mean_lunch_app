@@ -1,19 +1,28 @@
 'use strict';
 let TOKEN;
 angular.module('Users')
+      .factory('SaveRestaurant', function(){
+        let restaurantArr = [];
+        return restaurantArr;
+      })
        .controller('UsersController', UsersController)
        .controller('FoodController', FoodController)
        .controller('AuthController', AuthController)
 
-UsersController.$inject = ['$http'];
+UsersController.$inject = ['$http', 'SaveRestaurant'];
 
-function UsersController($http){
+function UsersController($http, SaveRestaurant){
   let self = this;
   self.all = [];
+  self.user = {};
   self.addUser = addUser;
   self.getUser = getUser;
+  self.getOne = getOne;
   self.deleteUser = deleteUser;
   self.newUser = {};
+  self.addRestaurant = addRestaurant;
+  self.saveRestaurant = SaveRestaurant;
+
 
   getUser();
 
@@ -25,6 +34,26 @@ function UsersController($http){
         self.all = response.data.users;
       });
   }
+  //retrieve just one user
+  function getOne(user){
+    console.log(user);
+    $http
+      .get('http://localhost:3000/user/' + user._id)
+      .then(function(response){
+        console.log(response.data);
+        self.user = response.data;
+      })
+    }
+
+  function addRestaurant(user){
+    $http
+      .put('http://localhost:3000/user/' + self.user._id, {"restaurant": SaveRestaurant[0]})
+      .then(function(response){
+        self.getOne(response.data);
+
+      })
+  }
+
 
   function addUser(){
     $http
@@ -57,16 +86,16 @@ function UsersController($http){
 //
 // .controller('FoodController', FoodController);
 
-FoodController.$inject = ['$http'];
+FoodController.$inject = ['$http', 'SaveRestaurant'];
 
-function FoodController($http){
+function FoodController($http, SaveRestaurant){
 let self = this;
 
 // self.all = [];
 self.all = '';
 self.address = '';
 self.getFood = getFood;
-
+self.foodArr = SaveRestaurant;
 getFood();
 
 function getFood(){
@@ -107,10 +136,15 @@ $http
   // self.all = res.data.response.venues[rando].name;
   self.all = res.data.response.venues[rando].name;
   self.address = res.data.response.venues[rando].location.address;
+  SaveRestaurant = [];
+  SaveRestaurant.push({
+    name: self.all,
+    location: self.address
+  })
  // self.all = res.response;
-});
-}
-}
+  });
+  }
+  }
 }
 
 AuthController.$inject = ['$http'];

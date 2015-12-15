@@ -7,7 +7,8 @@ let User = new mongoose.Schema({
   name: String,
   password: String,
   workZip: Number,
-  homeZip: Number
+  homeZip: Number,
+  restaurants: []
 });
 
 

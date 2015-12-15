@@ -21,14 +21,27 @@ let get = function(req, res){
     res.json({ users: users });
   })
 }
+//retrieve one user
+let getOneUser = function(req, res){
+  console.log(req.params);
+  User.findOne({ _id: req.params.id }, function(err, user){
+    if(err){ throw err };
+    console.log(user);
+    res.json(user)
+  })
+}
+
+
+
+
 //function that updates user data
 let put = function(req, res){
-  let userParams = req.body.user;
-  User.findOne({ name: userParams.name }, function(err, user){
+  let userParams = req;
+  console.log(userParams);
+  User.findOne({ _id: userParams.id }, function(err, user){
     user.update({
       name: userParams.newName,
-      workZip: userParams.newWorkZip,
-      homeZip: userParams.newHomeZip
+      restaurants: []
     }, function(err, user){
       res.send(user);
     });
@@ -55,6 +68,7 @@ let destroy = function(req, res){
 module.exports = {
   create: create,
   get: get,
+  getOneUser: getOneUser,
   put: put,
   destroy: destroy
 }

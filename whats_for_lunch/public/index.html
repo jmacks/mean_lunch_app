@@ -14,7 +14,6 @@
     <script src="/scripts/angular/angular.js"></script>
     <script src="/app.js"></script>
     <script src="/userController.js"></script>
-    <script src="/loginController.js"></script>
     <!-- <script src="/foodController.js"></script> -->
 
 
@@ -33,9 +32,8 @@
         <h2>Our Favorite Users</h2>
         <ul id="users">
           <li ng-repeat="user in users.all">
-            <h4>Name: {{user.name}}<button ng-click="users.deleteUser(user)">X</button></h4>
-            <p>Work Zip: {{user.workZip}}</p>
-            <p>Home Zip: {{user.homeZip}}</p>
+            <a ng-click="users.getOne(user)"><h4>Name: {{user.name}}<button ng-click="users.deleteUser(user)">X</button></h4></a>
+
           </li>
         </ul>
       </div>
@@ -51,17 +49,15 @@
           <input type="text" id="new-user-password" placeholder="Make It Good" ng-model="users.newUser.password">
         </div>
         <div>
-          <label for="new-user-workzip">Work Zip:</label>
-          <input type="text" id="new-user-workzip" placeholder="Work Zipcode" ng-model="users.newUser.workZip">
-        </div>
-        <div>
-          <label for="new-user-homezip">Home Zip:</label>
-          <input type="text" id="new-user-homezip" placeholder="Home Zipcode" ng-model="users.newUser.homeZip">
-        </div>
-        <div>
           <input type="submit" id="signup" value="SignUp">
         </div>
       </form>
+      <!-- current user information-->
+      <div>
+        {{users.user.name}}<br>
+        {{users.user.restaurants}}
+      </div>
+
     </section>
 
     <!-- <section ng-controller="AuthController as authorize"> -->
