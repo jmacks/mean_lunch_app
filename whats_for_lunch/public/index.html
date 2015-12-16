@@ -33,7 +33,7 @@
         <ul id="users">
           <li ng-repeat="user in users.all">
             <a ng-click="users.getOne(user)"><h4>Name: {{user.name}}<button ng-click="users.deleteUser(user)">X</button></h4></a>
-
+            <button ng-click="users.addRestaurant(user, SaveRestaurant)">save to faves</button>
           </li>
         </ul>
       </div>
@@ -58,7 +58,6 @@
         {{users.user.restaurants}}
       </div>
 
-    </section>
 
     <!-- <section ng-controller="AuthController as authorize"> -->
     <section ng-if="authorize.token == undefined">
@@ -91,6 +90,7 @@
       </div>
 
     </div>
+  </section>
 
 
   </body>

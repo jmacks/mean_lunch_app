@@ -2,8 +2,9 @@
 let TOKEN;
 angular.module('Users')
       .factory('SaveRestaurant', function(){
-        let restaurantArr = [];
-        return restaurantArr;
+        return {
+          restaurantArr: []
+        }
       })
        .controller('UsersController', UsersController)
        .controller('FoodController', FoodController)
@@ -21,7 +22,7 @@ function UsersController($http, SaveRestaurant){
   self.deleteUser = deleteUser;
   self.newUser = {};
   self.addRestaurant = addRestaurant;
-  self.saveRestaurant = SaveRestaurant;
+  // self.saveRestaurant = SaveRestaurant;
 
 
   getUser();
@@ -45,12 +46,15 @@ function UsersController($http, SaveRestaurant){
       })
     }
 
-  function addRestaurant(user){
+  function addRestaurant(user, SaveRestaurant){
+    console.log(user._id);
+    let myUser = user;
+    console.log(self.SaveRestaurant);
     $http
-      .put('http://localhost:3000/user/' + self.user._id, {"restaurant": SaveRestaurant[0]})
+      .put('http://localhost:3000/user/' + myUser._id, {"restaurant": "SaveRestaurant[0]"})
       .then(function(response){
         self.getOne(response.data);
-
+        console.log(response.data);
       })
   }
 
@@ -136,8 +140,8 @@ $http
   // self.all = res.data.response.venues[rando].name;
   self.all = res.data.response.venues[rando].name;
   self.address = res.data.response.venues[rando].location.address;
-  SaveRestaurant = [];
-  SaveRestaurant.push({
+
+  SaveRestaurant.restaurantArr.push({
     name: self.all,
     location: self.address
   })

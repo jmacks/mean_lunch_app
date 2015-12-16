@@ -23,7 +23,14 @@ app.use('/scripts', express.static(__dirname + '/node_modules'));
 app.use(routes);
 
 //connect to mongo database
-mongoose.connect('mongodb://localhost/whatsForLunch', function(err){
+// mongoose.connect('mongodb://localhost/whatsForLunch', function(err){
+//   if(err){
+//     console.log('there is a CONNECTION ERROR to the DATABASE');
+//   } else {
+//     console.log('We\'ve Successfully Connected to the Database!!!')
+//   }
+// });
+mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds033125.mongolab.com:33125/whatsforlunch', function(err){
   if(err){
     console.log('there is a CONNECTION ERROR to the DATABASE');
   } else {
