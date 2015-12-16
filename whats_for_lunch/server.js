@@ -23,7 +23,7 @@ app.use('/scripts', express.static(__dirname + '/node_modules'));
 app.use(routes);
 
 //connect to mongo database
-mongoose.connect(process.env.MONGOLAB_URI||'mongodb://localhost/whatsForLunch', function(err){
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/whatsForLunch', function(err){
   if(err){
     console.log('there is a CONNECTION ERROR to the DATABASE');
   } else {
@@ -40,6 +40,6 @@ const db = mongoose.connection;
 
 
 //server listener
-const server = app.listen(process.env.PORT||3000, function(){
+const server = app.listen(process.env.PORT || 3000, function(){
   console.log('Whats for Lunch is Running on Port 3000')
 });
