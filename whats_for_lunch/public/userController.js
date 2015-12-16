@@ -134,6 +134,7 @@ $http
 
 
 .then(function(res){
+  if(err){
   var venuesLength = res.data.response.venues.length
   var rando = Math.floor(Math.random()* venuesLength)
   console.log(res.data.response.venues[rando].location.address);
@@ -145,6 +146,19 @@ $http
     name: self.all,
     location: self.address
   })
+} else {
+  var venuesLength = res.data.response.venues.length
+  var rando = Math.floor(Math.random()* venuesLength)
+  console.log(res.data.response.venues[rando].location.address);
+  // self.all = res.data.response.venues[rando].name;
+  self.all = res.data.response.venues[rando].name;
+  self.address = res.data.response.venues[rando].location.address;
+
+  SaveRestaurant.restaurantArr.push({
+    name: self.all,
+    location: self.address
+  })
+}
  // self.all = res.response;
   });
   }
