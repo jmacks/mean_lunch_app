@@ -30,7 +30,7 @@ function UsersController($http, SaveRestaurant){
   //aaannnddd the functions!
   function getUser(){
     $http
-      .get('http://localhost:3000/user' )  //{token: TOKEN}
+      .get('/user' )  //{token: TOKEN}
       .then(function(response){
         self.all = response.data.users;
       });
@@ -39,7 +39,7 @@ function UsersController($http, SaveRestaurant){
   function getOne(user){
     console.log(user);
     $http
-      .get('http://localhost:3000/user/' + user._id)
+      .get('/user/' + user._id)
       .then(function(response){
         console.log(response.data);
         self.user = response.data;
@@ -51,7 +51,7 @@ function UsersController($http, SaveRestaurant){
     let myUser = user;
     console.log(self.SaveRestaurant);
     $http
-      .put('http://localhost:3000/user/' + myUser._id, {"restaurant": "SaveRestaurant[0]"})
+      .put('/user/' + myUser._id, {"restaurant": "SaveRestaurant[0]"})
       .then(function(response){
         self.getOne(response.data);
         console.log(response.data);
@@ -61,7 +61,7 @@ function UsersController($http, SaveRestaurant){
 
   function addUser(){
     $http
-      .post('http://localhost:3000/user', self.newUser)
+      .post('/user', self.newUser)
       .then(function(response){
         getUser();
       });
@@ -72,7 +72,7 @@ function UsersController($http, SaveRestaurant){
     console.log("user deleted");
     console.log(user);
     $http
-      .delete('http://localhost:3000/user/'+ user._id)
+      .delete('/user/'+ user._id)
       .then(function(response){
         let index = self.all.indexOf(user);
         self.all.splice(index, 1);
@@ -162,7 +162,7 @@ function AuthController($http){
 
   function login(user){
     $http
-    .post("http://localhost:3000/authenticate", { name: user.name, password: user.password }).success(function(data, status){
+    .post("/authenticate", { name: user.name, password: user.password }).success(function(data, status){
        if(data.token){
         TOKEN = data.token;
         self.token = data.token;//doesnt work

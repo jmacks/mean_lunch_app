@@ -36,16 +36,13 @@ let getOneUser = function(req, res){
 
 //function that updates user data
 let put = function(req, res){
-  debugger;
   console.log(req + " req.params");
   User.findOne({ _id: req.params.id }, function(err, user){
-    debugger;
     if(err){throw err}
     user.update({
       name: req.params.name,
       restaurants: req.params.restaurants
     }, function(err, user){
-      debugger;
       res.send(user);
     });
   });
