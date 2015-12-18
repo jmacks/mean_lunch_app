@@ -22,7 +22,7 @@ function UsersController($http, SaveRestaurant){
   self.deleteUser = deleteUser;
   self.newUser = {};
   self.addRestaurant = addRestaurant;
-  // self.saveRestaurant = SaveRestaurant;
+  self.savedRestaurant = SaveRestaurant.restaurantArr;
 
 
   getUser();
@@ -46,12 +46,20 @@ function UsersController($http, SaveRestaurant){
       })
     }
 
-  function addRestaurant(user, SaveRestaurant){
+  function addRestaurant(user){
     console.log(user._id);
     let myUser = user;
-    console.log(self.SaveRestaurant);
+    console.log(self.savedRestaurant);
     $http
-      .put('/user/' + myUser._id, {"restaurant": "SaveRestaurant[0]"})
+      ({
+        url: '/user/' + myUser._id,
+        method: 'put',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        data: {
+          id: myUser._id,
+          restaurant: SaveRestaurant.restaurantArr
+        }
+      })
       .then(function(response){
         self.getOne(response.data);
         console.log(response.data);
@@ -99,7 +107,7 @@ let self = this;
 self.all = '';
 self.address = '';
 self.getFood = getFood;
-self.foodArr = SaveRestaurant;
+self.foodArr = SaveRestaurant.restaurantArr;
 getFood();
 
 function getFood(){
@@ -130,20 +138,23 @@ function getFood(){
 
 function fourSquareAPI(data){
 $http
-.get("https://api.foursquare.com/v2/venues/search?client_id=D3SET0CHYGC3CASAHZN2KNTLUSQKA0KQMIXARVBKTN5PXXBM&client_secret=P32CRHV34KCIRUB0GAEZAB54NQBVJ3K42R0WC0DKF5MICCUX&v=20130815&ll="+data.coords.latitude+","+data.coords.longitude+"&query=" + randomCuisine +"&radius=350")
+.get("https://api.foursquare.com/v2/venues/search?client_id=D3SET0CHYGC3CASAHZN2KNTLUSQKA0KQMIXARVBKTN5PXXBM&client_secret=P32CRHV34KCIRUB0GAEZAB54NQBVJ3K42R0WC0DKF5MICCUX&v=20130815&ll="+data.coords.latitude+","+data.coords.longitude+"&query=" + randomCuisine +"&radius=600")
 
 
 .then(function(res){
   var venuesLength = res.data.response.venues.length
   var rando = Math.floor(Math.random()* venuesLength)
   console.log(res.data.response.venues[rando].location.address);
+  if(res.data.response.venues[rando].name == undefined){
+    return getFood();
+  } else {
   self.all = res.data.response.venues[rando].name;
   self.address = res.data.response.venues[rando].location.address;
 
   SaveRestaurant.restaurantArr.push({
     name: self.all,
     location: self.address
-  })
+  })}
  // self.all = res.response;
   });
   }
