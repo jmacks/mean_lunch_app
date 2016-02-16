@@ -20,6 +20,7 @@ router.route('/user/:id')
 
 router.route('/food')
       .get(food.retrieve)
+      
 router.route('/authenticate')
       .post(auth.post);
 
